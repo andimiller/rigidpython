@@ -6,6 +6,8 @@ class TypeWarning(Warning):
 
 
 def _typed(f: callable) -> callable:
+    if not __debug__:
+        return f
     s = inspect.signature(f)  # type: inspect.Signature
 
     def inner(*args, **kwargs):
